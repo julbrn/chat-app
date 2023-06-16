@@ -41,7 +41,7 @@ function Register() {
     } else if (password.length < 5) {
       toast.error("Password should consist of at least 5 characters", toastifyOptions);
       return false;
-    } else if (email.length == "") {
+    } else if (email.length === "") {
       toast.error("Please write your email", toastifyOptions);
       return false;
     }
