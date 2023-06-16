@@ -13,8 +13,13 @@ function Register() {
     username: "",
     email: "",
     password: "",
-    passwordConfirmation: "",
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("chat-user")) {
+      navigate("/");
+    }
+  }, []);
 
   const toastifyOptions = {
     position: "bottom-center",
@@ -26,11 +31,8 @@ function Register() {
 
   const handleValidation = () => {
     const usernameRegex = /^[a-zA-Z0-9_]+$/;
-    const { username, email, password, passwordConfirmation } = values;
-    if (password !== passwordConfirmation) {
-      toast.error("Passwords should be the same.", toastifyOptions);
-      return false;
-    } else if (username.length < 3) {
+    const { username, email, password } = values;
+    if (username.length < 3) {
       toast.error("Username should consist of at least 3 characters", toastifyOptions);
       return false;
     } else if (!usernameRegex.test(username)) {
@@ -75,12 +77,6 @@ function Register() {
           <input type="text" placeholder="Username" name="username" onChange={(e) => handleChange(e)} />
           <input type="email" placeholder="E-mail" name="email" onChange={(e) => handleChange(e)} />
           <input type="password" placeholder="Password" name="password" onChange={(e) => handleChange(e)} />
-          <input
-            type="password"
-            placeholder="Confirm password"
-            name="passwordConfirmation"
-            onChange={(e) => handleChange(e)}
-          />
           <button type="submit">Create User</button>
           <span>
             Already have an account? <Link to="/login">Login</Link>

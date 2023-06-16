@@ -18,8 +18,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         min: 5,
-        max: 30,
-        select: false
+        max: 30
     },
     isAvatarSet: {
         type: Boolean,
