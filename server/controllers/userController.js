@@ -40,3 +40,31 @@ module.exports.login = async (req, res, next) => {
         next(err)
     }
 }
+
+module.exports.setAvatar = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const avatar = req.body.image;
+        const userData = await User.findByIdAndUpdate(userId, {
+            isAvatarSet: true,
+            avatar
+        });
+        return res.json({
+            isSet: userData.isAvatarSet,
+            image: userData.avatar
+        })
+    }
+    catch (err) {
+        next(err)
+    }
+}
+
+module.exports.getAllContacts = async (req, res, next) => {
+    try {
+        const users = await User.find({ _id: { $ne: req.params.id } }).select(["email", "username", "avatar", "_id"]);
+        return res.json(users)
+    }
+    catch (err) {
+        next(err)
+    }
+}
