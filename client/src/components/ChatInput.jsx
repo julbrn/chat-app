@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
 import Smile from "../assets/emoji.svg";
+import SendIcon from "../assets/send.png";
 
-function ChatInput() {
-  const [message, setMessage] = useState("");
+function ChatInput({ handleSendMessage }) {
+  const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const handleEmojiPickerhideShow = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
-  const handleEmojiClick = (event, emojiObject) => {
-    let message = message;
-    message += emojiObject.emoji;
-    setMessage(message);
-  };
+  const emojiContainer = document.querySelector(".emoji");
 
-  const sendChat = () => {};
+  if (showEmojiPicker === true) {
+    document.addEventListener("click", handleCloseEmoji);
+  }
+
+  function handleCloseEmoji(e) {
+    if (!emojiContainer.contains(e.target)) {
+      setShowEmojiPicker(false);
+      document.removeEventListener("click", handleCloseEmoji);
+    }
+  }
+
+  const sendChat = (e) => {
+    e.preventDefault();
+    if (msg.length > 0) {
+      handleSendMessage(msg);
+      setMsg("");
+    }
+  };
   return (
     <Container>
       <div className="button-container">
@@ -26,23 +40,21 @@ function ChatInput() {
           </button>
           {showEmojiPicker && (
             <Picker
-              onEmojiClick={handleEmojiClick}
+              onEmojiClick={(emojiObject) => setMsg((prevMsg) => prevMsg + emojiObject.emoji)}
               searchDisabled={true}
-              emojiStyle="apple"
               lazyLoadEmojis={false}
               theme="dark"
+              skinTonesDisabled="true"
             />
           )}
         </div>
       </div>
       <form className="input-container" onSubmit={(event) => sendChat(event)}>
-        <input
-          type="text"
-          placeholder="type your message here"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-        />
-        <button type="submit">SEND</button>
+        <input type="text" placeholder="type your message here" onChange={(e) => setMsg(e.target.value)} value={msg} />
+        <button type="submit" className="send-button">
+          {" "}
+          <img className="send-button-image" src={SendIcon} alt="Send a message" />
+        </button>
       </form>
     </Container>
   );
@@ -127,8 +139,15 @@ const Container = styled.div`
         outline: none;
       }
     }
+    .send-button-image {
+      height: 24px;
+      width: 24px;
+    }
     button {
-      padding: 0.3rem 2rem;
+      cursor: pointer;
+      padding: 8px 30px;
+      object-fit: contain;
+      object-position: center;
       border-radius: 2rem;
       display: flex;
       justify-content: center;

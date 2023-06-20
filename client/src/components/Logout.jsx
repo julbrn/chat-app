@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 import LogoutIcon from "../assets/logout.png";
 
 function Logout() {
