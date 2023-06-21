@@ -17,11 +17,7 @@ function Chat() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.getItem("chat-user")) {
-      navigate("/login");
-    } else {
-      setCurrentUser(JSON.parse(localStorage.getItem("chat-user")));
-    }
+    setCurrentUser(JSON.parse(localStorage.getItem("chat-user")));
   }, []);
 
   const fetchContacts = useCallback(async () => {

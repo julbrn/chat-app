@@ -22,12 +22,6 @@ function AvatarSettings() {
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    if (!localStorage.getItem("chat-user")) {
-      navigate("/login");
-    }
-  }, []);
-
   const setAvatar = () => {
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastifyOptions);
