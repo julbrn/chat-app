@@ -64,7 +64,7 @@ const Container = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 5% 95%;
-  background-color: #080420;
+  background-color: #ffffff34;
   padding: 0 2rem;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     padding: 0 1rem;
@@ -77,11 +77,6 @@ const Container = styled.div`
     gap: 1rem;
     .emoji {
       position: relative;
-      svg {
-        font-size: 1.5rem;
-        color: #ffff00c8;
-        cursor: pointer;
-      }
       .emoji-button {
         background-color: transparent;
         border: none;
@@ -104,13 +99,12 @@ const Container = styled.div`
         bottom: 0;
         left: 40px;
         background-color: #080420;
-        box-shadow: 0 5px 10px #9a86f3;
-        border-color: #9a86f3;
+        border-color: #81ba5d;
         ::-webkit-scrollbar {
           background-color: #080420;
           width: 5px;
           &-thumb {
-            background-color: #9a86f3;
+            background-color: #b3d87d;
           }
         }
       }
@@ -125,15 +119,17 @@ const Container = styled.div`
     background-color: #ffffff34;
     input {
       width: 90%;
-      height: 60%;
+      height: 70%;
       background-color: transparent;
       color: white;
       border: none;
       padding-left: 1rem;
       font-size: 1.2rem;
+      line-height: 2;
+      padding-bottom: 5px;
 
       &::selection {
-        background-color: #9a86f3;
+        background-color: #81ba5d;
       }
       &:focus {
         outline: none;
@@ -152,8 +148,12 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #9a86f3;
+      background-color: #81ba5d;
       border: none;
+      transition: all 0.5s ease-in-out;
+      &:hover {
+        background-color: #b3d87d;
+      }
       @media screen and (min-width: 720px) and (max-width: 1080px) {
         padding: 0.3rem 1rem;
         svg {

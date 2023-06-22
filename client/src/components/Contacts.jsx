@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Camera from "../assets/camera.png";
 import styled from "styled-components";
-import Logo from "../assets/logo1.png";
+import Logo from "../assets/logo6.png";
 
 function Contacts({ contacts, currentUser, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserAvatar, setCurrentUserAvatar] = useState(undefined);
   const [currentSelectedChat, setCurrentSelectedChat] = useState(undefined);
+  const navigate = useNavigate();
   useEffect(() => {
     if (currentUser) {
       setCurrentUserAvatar(currentUser.avatar);
@@ -16,6 +19,10 @@ function Contacts({ contacts, currentUser, changeChat }) {
   function changeCurrentSelectedChat(index, contact) {
     setCurrentSelectedChat(index);
     changeChat(contact);
+  }
+
+  function onEditAvatar() {
+    navigate("/avatar");
   }
 
   return (
@@ -47,6 +54,7 @@ function Contacts({ contacts, currentUser, changeChat }) {
           <div className="current-user">
             <div className="avatar">
               <img src={currentUserAvatar} alt="avatar" />
+              <button onClick={onEditAvatar} className="avatar-button" aria-label="Edit avatar" type="button" />
             </div>
             <div className="username">
               <h2>{currentUserName}</h2>
@@ -62,7 +70,7 @@ const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
-  background-color: #080420;
+  background-color: #384254;
   .brand {
     display: flex;
     align-items: center;
@@ -113,20 +121,52 @@ const Container = styled.div`
       }
     }
     .selected {
-      background-color: #9a86f3;
+      background-color: rgba(179, 216, 125, 0.8);
     }
   }
 
   .current-user {
-    background-color: #0d0d30;
+    background-color: rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 1.2rem;
     .avatar {
+      border-radius: 50%;
+      position: relative;
+      height: 4rem;
+      width: 4rem;
+      .avatar-button {
+        background-image: url(${Camera});
+        background-color: rgba(179, 216, 125, 0.8);
+        background-repeat: no-repeat;
+        background-size: 3rem;
+        background-position: center;
+        position: absolute;
+        height: 4.7rem;
+        width: 4.7rem;
+        top: 0;
+        left: -5px;
+        padding: 0;
+        margin: 0;
+        border: none;
+        outline: none;
+        border-radius: 50%;
+        opacity: 0;
+        z-index: 2;
+        &:hover {
+          opacity: 1;
+          cursor: pointer;
+          transition: opacity 0.7s linear;
+        }
+      }
+
       img {
-        height: 4rem;
-        max-inline-size: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        margin: 0;
       }
     }
     .username {

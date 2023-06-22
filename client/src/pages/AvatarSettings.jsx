@@ -114,7 +114,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 3rem;
-  background-color: #131324;
+  background-color: #384254;
   height: 100vh;
   width: 100vw;
 
@@ -158,7 +158,7 @@ const Container = styled.div`
       }
     }
     .selected {
-      border: 0.4rem solid #4e0eff;
+      border: 0.4rem solid #b3d87d;
     }
   }
 
@@ -169,11 +169,15 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     object-fit: contain;
-    background-color: #4e0eff;
+    background-color: #81ba5d;
     height: 2.3rem;
     width: 2.3rem;
     border: none;
     outline: transparent;
+    transition: all 0.4s ease-in-out;
+    &:hover {
+      background-color: #b3d87d;
+    }
     img {
       height: 1.7rem;
       width: 1.7rem;
@@ -181,7 +185,7 @@ const Container = styled.div`
   }
 
   .submit-btn {
-    background-color: #4e0eff;
+    background-color: #81ba5d;
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -190,8 +194,9 @@ const Container = styled.div`
     border-radius: 0.4rem;
     font-size: 1rem;
     text-transform: uppercase;
+    transition: all 0.4s ease-in-out;
     &:hover {
-      background-color: #4e0eff;
+      background-color: #b3d87d;
     }
   }
 `;

@@ -23,7 +23,7 @@ const Container = styled.div`
     height: 20rem;
   }
   span {
-    color: #4e0eff;
+    color: #b3d87d;
   }
 `;
 

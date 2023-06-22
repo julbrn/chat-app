@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../assets/logo1.png";
+import Logo from "../assets/logo6.png";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
@@ -26,7 +26,7 @@ function Register() {
     autoClose: 5500,
     pauseOnHover: true,
     draggable: true,
-    theme: "dark",
+    theme: "light",
   };
 
   const handleValidation = () => {
@@ -83,7 +83,7 @@ function Register() {
           </span>
         </form>
       </FormContainer>
-      <ToastContainer></ToastContainer>
+      <StyledContainer></StyledContainer>
     </>
   );
 }
@@ -96,7 +96,7 @@ const FormContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background-color: #131324;
+  background-color: #384254;
   .brand {
     display: flex;
     align-items: center;
@@ -114,23 +114,26 @@ const FormContainer = styled.div`
     flex-direction: column;
     border-radius: 2rem;
     gap: 2rem;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.1);
     padding: 3rem 5rem;
     input {
       background-color: transparent;
       padding: 1rem;
-      border: 0.1rem solid #208060;
+      border: 0.1rem solid #b3d87d;
       border-radius: 0.4rem;
       color: #fff;
       width: 100%;
       font-size: 1rem;
       &:focus {
-        border: 0.1rem solid #893528;
+        border: 0.1rem solid #3a9bc2;
         outline: transparent;
       }
     }
+    ::-ms-reveal {
+      filter: invert(100%);
+    }
     button {
-      background-color: #208060;
+      background-color: #81ba5d;
       color: #fff;
       padding: 1rem 2rem;
       border: none;
@@ -141,18 +144,38 @@ const FormContainer = styled.div`
       text-transform: uppercase;
       transition: all 0.5s ease-in-out;
       &:hover {
-        background-color: #893528;
+        background-color: #b3d87d;
       }
     }
     span {
       color: #fff;
       text-transform: uppercase;
       a {
-        color: #208060;
-        font-weight: bold;
+        color: #81ba5d;
         text-decoration: none;
+        font-weight: 600;
+        transition: all 0.4s ease-in-out;
+        &:hover {
+          color: #b3d87d;
+        }
       }
     }
+  }
+`;
+const StyledContainer = styled(ToastContainer)`
+  &&&.Toastify__toast-container {
+  }
+  .Toastify__toast {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #fff;
+  }
+  .Toastify__toast-body {
+  }
+  .Toastify__progress-bar {
+    background-color: #f45d5e;
+  }
+  .Toastify__close-button {
+    filter: invert(100%);
   }
 `;
 

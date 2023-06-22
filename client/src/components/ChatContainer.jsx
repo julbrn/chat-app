@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Logout from "./Logout";
 import ChatInput from "./ChatInput";
-import ChatMessages from "./ChatMessages";
 import axios from "axios";
 import { sendMessageRoute } from "../utils/Api";
 import { recieveMessagesRoute } from "../utils/Api";
@@ -19,7 +18,6 @@ function ChatContainer({ currentChat, currentUser, socket }) {
           const response = await axios.post(recieveMessagesRoute, { from: currentUser._id, to: currentChat._id });
           setMessages(response.data);
         } catch (error) {
-          // handle error
           console.error(error);
         }
       }
@@ -113,7 +111,7 @@ const Container = styled.div`
       }
       .username {
         h3 {
-          color: white;
+          color: #fff;
         }
       }
     }
@@ -141,7 +139,7 @@ const Container = styled.div`
         padding: 1rem;
         font-size: 1.1rem;
         border-radius: 1rem;
-        color: #d1d1d1;
+        color: #fff;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }
@@ -150,13 +148,13 @@ const Container = styled.div`
     .sent {
       justify-content: flex-end;
       .content {
-        background-color: #4f04ff21;
+        background-color: #81ba5d;
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: #9900ff20;
+        background-color: #3a9bc2;
       }
     }
   }
