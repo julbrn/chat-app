@@ -7,7 +7,13 @@ import AvatarSettings from "./pages/AvatarSettings";
 import { ColorContext } from "./colorContext";
 
 export default function App() {
-  const [colorScheme, setColorScheme] = React.useState("green");
+  const defaultTheme = () => {
+    if (localStorage.getItem("color")) {
+      return localStorage.getItem("color");
+    }
+    else return "green"
+  }
+  const [colorScheme, setColorScheme] = React.useState(defaultTheme);
   const ProtectedRoute = ({ children }) => {
     if (!localStorage.getItem("chat-user")) {
       return <Navigate to="/login" />;
@@ -22,7 +28,7 @@ export default function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/avatar" element={<ProtectedRoute><AvatarSettings /></ProtectedRoute>}></Route>
-        <Route path="/" element={<ProtectedRoute><Chat /></ProtectedRoute>}></Route>
+        <Route path="/" element={<ProtectedRoute><Chat colorScheme={colorScheme} setColorScheme={setColorScheme} /></ProtectedRoute>}></Route>
       </Routes>
     </ColorContext.Provider>
   </BrowserRouter>

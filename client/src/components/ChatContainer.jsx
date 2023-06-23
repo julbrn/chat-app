@@ -19,7 +19,10 @@ function ChatContainer({ currentChat, currentUser, socket }) {
     async function fetchMessages() {
       if (currentChat) {
         try {
-          const response = await axios.post(recieveMessagesRoute, { from: currentUser._id, to: currentChat._id });
+          const response = await axios.post(recieveMessagesRoute, {
+            from: currentUser._id,
+            to: currentChat._id,
+          });
           setMessages(response.data);
         } catch (error) {
           console.error(error);
@@ -61,8 +64,16 @@ function ChatContainer({ currentChat, currentUser, socket }) {
   }, [messages]);
 
   const formatTime = (time) => {
-    return time.substring(11, 16);
+    if (time) {
+      return time.substring(11, 16);
+    } else {
+      const hours = new Date().getHours().toString();
+      const minutes = new Date().getMinutes().toString();
+      return `${hours}:${minutes}`;
+    }
   };
+
+  console.log(messages);
 
   return (
     <Container colors={colors}>

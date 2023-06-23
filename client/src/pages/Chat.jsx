@@ -11,7 +11,7 @@ import { io } from "socket.io-client";
 import { ColorContext } from "../colorContext";
 import { greenColors, yellowColors } from "../utils/colors";
 
-function Chat() {
+function Chat({ setColorScheme }) {
   const colorScheme = useContext(ColorContext);
   const colors = colorScheme === "green" ? greenColors : yellowColors;
   const socket = useRef();
@@ -53,7 +53,14 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts colors={colors} contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+        <Contacts
+          colorScheme={colorScheme}
+          setColorScheme={setColorScheme}
+          colors={colors}
+          contacts={contacts}
+          currentUser={currentUser}
+          changeChat={handleChatChange}
+        />
         {currentChat === undefined ? (
           <Welcome colors={colors} currentUser={currentUser} />
         ) : (

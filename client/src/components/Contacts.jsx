@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Camera from "../assets/camera.png";
 import styled from "styled-components";
 import Logo from "../assets/logo6.png";
+import Theme from "../assets/theme.png";
 
-function Contacts({ contacts, currentUser, changeChat, colors }) {
+function Contacts({ contacts, currentUser, changeChat, colors, setColorScheme, colorScheme }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserAvatar, setCurrentUserAvatar] = useState(undefined);
   const [currentSelectedChat, setCurrentSelectedChat] = useState(undefined);
@@ -32,6 +33,14 @@ function Contacts({ contacts, currentUser, changeChat, colors }) {
           <div className="brand">
             <img src={Logo} alt="logo" />
             <h3>Yada-Chat</h3>
+            <button
+              title="Change the color scheme"
+              onClick={() => {
+                const newColor = colorScheme === "green" ? "yellow" : "green";
+                setColorScheme(newColor);
+                localStorage.setItem("color", newColor);
+              }}
+            ></button>
           </div>
           <div className="contacts">
             {contacts.map((contact, index) => {
@@ -54,7 +63,13 @@ function Contacts({ contacts, currentUser, changeChat, colors }) {
           <div className="current-user">
             <div className="avatar">
               <img src={currentUserAvatar} alt="avatar" />
-              <button onClick={onEditAvatar} className="avatar-button" aria-label="Edit avatar" type="button" />
+              <button
+                title="Edit your profile picture"
+                onClick={onEditAvatar}
+                className="avatar-button"
+                aria-label="Edit avatar"
+                type="button"
+              />
             </div>
             <div className="username">
               <h2>{currentUserName}</h2>
@@ -82,6 +97,18 @@ const Container = styled.div`
     h3 {
       color: white;
       text-transform: uppercase;
+    }
+    button {
+      background-image: url(${Theme});
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background-color: transparent;
+      border: none;
+      outline: transparent;
+      height: 30px;
+      width: 30px;
+      cursor: pointer;
     }
   }
   .contacts {

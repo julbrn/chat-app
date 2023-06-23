@@ -1,3 +1,3 @@
 import React from "react";
 
-export const ColorContext = React.createContext("green");
+export const ColorContext = React.createContext();

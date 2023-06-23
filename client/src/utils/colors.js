@@ -9,5 +9,5 @@ export const yellowColors = {
     lighterMainColor: "#fdc989",
     darkerMainColor: "#fdc989",
     accent: "#007686",
-    semiTransparent: "rgba(179, 216, 125, 0.8)"
+    semiTransparent: "rgba(253, 201, 137, 0.8)"
 };
