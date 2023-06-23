@@ -43,7 +43,7 @@ function ChatInput({ handleSendMessage, colors }) {
               onEmojiClick={(emojiObject) => setMsg((prevMsg) => prevMsg + emojiObject.emoji)}
               searchDisabled={true}
               lazyLoadEmojis={false}
-              theme="dark"
+              theme="light"
               skinTonesDisabled="true"
             />
           )}
@@ -98,10 +98,10 @@ const Container = styled.div`
         position: absolute;
         bottom: 0;
         left: 40px;
-        background-color: #080420;
+        background-color: #ffffffc1;
         border-color: ${({ colors }) => colors.darkerMainColor};
         ::-webkit-scrollbar {
-          background-color: #080420;
+          background-color: #ffffff34;
           width: 5px;
           &-thumb {
             background-color: ${({ colors }) => colors.lighterMainColor};

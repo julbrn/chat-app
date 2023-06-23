@@ -6,7 +6,7 @@ import LogoutIcon from "../assets/logout.png";
 function Logout() {
   const navigate = useNavigate();
   const handleClick = async () => {
-    localStorage.clear();
+    localStorage.removeItem("chat-user");
     navigate("/login");
   };
   return (

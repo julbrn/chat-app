@@ -73,8 +73,6 @@ function ChatContainer({ currentChat, currentUser, socket }) {
     }
   };
 
-  console.log(messages);
-
   return (
     <Container colors={colors}>
       <div className="chat-header">
