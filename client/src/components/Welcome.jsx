@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-function Welcome({ currentUser }) {
+function Welcome({ currentUser, colors }) {
   return (
-    <Container>
+    <Container colors={colors}>
       <h1>
         Welcome, <span>{currentUser?.username}!</span>
       </h1>
-      <h3>Please select a chat to Start messaging.</h3>
+      <h3>Please select a chat to start messaging.</h3>
     </Container>
   );
 }
@@ -19,11 +19,12 @@ const Container = styled.div`
   color: white;
   padding-inline: 14px;
   flex-direction: column;
-  img {
-    height: 20rem;
+  h3 {
+    padding-top: 0.5rem;
   }
+
   span {
-    color: #b3d87d;
+    color: ${({ colors }) => colors.lighterMainColor};
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useContext } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,8 +8,12 @@ import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
 import { host } from "../utils/Api";
 import { io } from "socket.io-client";
+import { ColorContext } from "../colorContext";
+import { greenColors, yellowColors } from "../utils/colors";
 
 function Chat() {
+  const colorScheme = useContext(ColorContext);
+  const colors = colorScheme === "green" ? greenColors : yellowColors;
   const socket = useRef();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -29,7 +33,7 @@ function Chat() {
         navigate("/avatar");
       }
     }
-  }, [currentUser, axios, allContactsRoute, setContacts, navigate]);
+  }, [currentUser, allContactsRoute, setContacts]);
 
   useEffect(() => {
     if (currentUser) {
@@ -49,9 +53,9 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+        <Contacts colors={colors} contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
         {currentChat === undefined ? (
-          <Welcome currentUser={currentUser} />
+          <Welcome colors={colors} currentUser={currentUser} />
         ) : (
           <ChatContainer currentChat={currentChat} currentUser={currentUser} socket={socket} />
         )}

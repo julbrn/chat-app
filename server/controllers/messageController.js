@@ -29,6 +29,7 @@ module.exports.getMessage = async (req, res, next) => {
             return {
                 fromSelf: msg.sender.toString() === from,
                 message: msg.message.text,
+                time: msg.createdAt
             }
         });
         return res.json(chatMessages)

@@ -4,7 +4,7 @@ import Camera from "../assets/camera.png";
 import styled from "styled-components";
 import Logo from "../assets/logo6.png";
 
-function Contacts({ contacts, currentUser, changeChat }) {
+function Contacts({ contacts, currentUser, changeChat, colors }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserAvatar, setCurrentUserAvatar] = useState(undefined);
   const [currentSelectedChat, setCurrentSelectedChat] = useState(undefined);
@@ -28,7 +28,7 @@ function Contacts({ contacts, currentUser, changeChat }) {
   return (
     <>
       {currentUserAvatar && currentUserName && (
-        <Container>
+        <Container colors={colors}>
           <div className="brand">
             <img src={Logo} alt="logo" />
             <h3>Yada-Chat</h3>
@@ -121,7 +121,7 @@ const Container = styled.div`
       }
     }
     .selected {
-      background-color: rgba(179, 216, 125, 0.8);
+      background-color: ${({ colors }) => colors.semiTransparent};
     }
   }
 
@@ -138,7 +138,7 @@ const Container = styled.div`
       width: 4rem;
       .avatar-button {
         background-image: url(${Camera});
-        background-color: rgba(179, 216, 125, 0.8);
+        background-color: ${({ colors }) => colors.semiTransparent};
         background-repeat: no-repeat;
         background-size: 3rem;
         background-position: center;

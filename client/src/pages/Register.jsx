@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo6.png";
@@ -6,8 +6,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { registerRoute } from "../utils/Api";
+import { ColorContext } from "../colorContext";
+import { greenColors, yellowColors } from "../utils/colors";
 
 function Register() {
+  const colorScheme = useContext(ColorContext);
+  const colors = colorScheme === "green" ? greenColors : yellowColors;
   const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
@@ -33,16 +37,16 @@ function Register() {
     const usernameRegex = /^[a-zA-Z0-9_]+$/;
     const { username, email, password } = values;
     if (username.length < 3) {
-      toast.error("Username should consist of at least 3 characters", toastifyOptions);
+      toast.error("Username must be 3 characters or more", toastifyOptions);
       return false;
     } else if (!usernameRegex.test(username)) {
-      toast.error("Username can only include letters, numbers and underscores", toastifyOptions);
+      toast.error("Please use only letters, numbers and underscores for your username.", toastifyOptions);
       return false;
     } else if (password.length < 5) {
-      toast.error("Password should consist of at least 5 characters", toastifyOptions);
+      toast.error("Password must be 5 characters or more.", toastifyOptions);
       return false;
     } else if (email.length === "") {
-      toast.error("Please write your email", toastifyOptions);
+      toast.error("Email field cannot be empty.", toastifyOptions);
       return false;
     }
     return true;
@@ -68,7 +72,7 @@ function Register() {
   };
   return (
     <>
-      <FormContainer>
+      <FormContainer colors={colors}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="brand">
             <img src={Logo} alt="logo" />
@@ -119,13 +123,13 @@ const FormContainer = styled.div`
     input {
       background-color: transparent;
       padding: 1rem;
-      border: 0.1rem solid #b3d87d;
+      border: 0.1rem solid ${({ colors }) => colors.lighterMainColor};
       border-radius: 0.4rem;
       color: #fff;
       width: 100%;
       font-size: 1rem;
       &:focus {
-        border: 0.1rem solid #3a9bc2;
+        border: 0.1rem solid ${({ colors }) => colors.accent};
         outline: transparent;
       }
     }
@@ -133,7 +137,7 @@ const FormContainer = styled.div`
       filter: invert(100%);
     }
     button {
-      background-color: #81ba5d;
+      background-color: ${({ colors }) => colors.darkerMainColor};
       color: #fff;
       padding: 1rem 2rem;
       border: none;
@@ -144,19 +148,19 @@ const FormContainer = styled.div`
       text-transform: uppercase;
       transition: all 0.5s ease-in-out;
       &:hover {
-        background-color: #b3d87d;
+        background-color: ${({ colors }) => colors.lighterMainColor};
       }
     }
     span {
       color: #fff;
       text-transform: uppercase;
       a {
-        color: #81ba5d;
+        color: ${({ colors }) => colors.darkerMainColor};
         text-decoration: none;
         font-weight: 600;
         transition: all 0.4s ease-in-out;
         &:hover {
-          color: #b3d87d;
+          color: ${({ colors }) => colors.lighterMainColor};
         }
       }
     }

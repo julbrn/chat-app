@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import styled from "styled-components";
 import Logout from "./Logout";
 import ChatInput from "./ChatInput";
@@ -6,8 +6,12 @@ import axios from "axios";
 import { sendMessageRoute } from "../utils/Api";
 import { recieveMessagesRoute } from "../utils/Api";
 import { v4 as uuidv4 } from "uuid";
+import { ColorContext } from "../colorContext";
+import { greenColors, yellowColors } from "../utils/colors";
 
 function ChatContainer({ currentChat, currentUser, socket }) {
+  const colorScheme = useContext(ColorContext);
+  const colors = colorScheme === "green" ? greenColors : yellowColors;
   const [messages, setMessages] = useState([]);
   const [recievedMessage, setRecievedMessage] = useState(null);
   let scrollRef = useRef();
@@ -56,8 +60,12 @@ function ChatContainer({ currentChat, currentUser, socket }) {
     scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
   }, [messages]);
 
+  const formatTime = (time) => {
+    return time.substring(11, 16);
+  };
+
   return (
-    <Container>
+    <Container colors={colors}>
       <div className="chat-header">
         <div className="user-details">
           <div className="avatar">
@@ -76,13 +84,14 @@ function ChatContainer({ currentChat, currentUser, socket }) {
               <div className={`message ${message.fromSelf ? "sent" : "recieved"}`}>
                 <div className="content">
                   <p>{message.message}</p>
+                  <span>{formatTime(message.time)}</span>
                 </div>
               </div>
             </div>
           );
         })}
       </div>
-      <ChatInput handleSendMessage={handleSendMessage} />
+      <ChatInput colors={colors} handleSendMessage={handleSendMessage} />
     </Container>
   );
 }
@@ -134,9 +143,10 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       .content {
+        min-width: 84px;
         max-width: 40%;
         overflow-wrap: break-word;
-        padding: 1rem;
+        padding: 1rem 1rem 0.5rem;
         font-size: 1.1rem;
         border-radius: 1rem;
         color: #fff;
@@ -144,17 +154,24 @@ const Container = styled.div`
           max-width: 70%;
         }
       }
+      span {
+        padding-top: 0.5rem;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+        float: right;
+      }
     }
     .sent {
       justify-content: flex-end;
       .content {
-        background-color: #81ba5d;
+        background-color: ${({ colors }) => colors.darkerMainColor};
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: #3a9bc2;
+        background-color: ${({ colors }) => colors.accent};
       }
     }
   }

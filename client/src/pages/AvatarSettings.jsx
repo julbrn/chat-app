@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Loader from "../assets/preloader.gif";
@@ -7,8 +7,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { avatarRoute } from "../utils/Api";
+import { ColorContext } from "../colorContext";
+import { greenColors, yellowColors } from "../utils/colors";
 
 function AvatarSettings() {
+  const colorScheme = useContext(ColorContext);
+  const colors = colorScheme === "green" ? greenColors : yellowColors;
   const api = "https://api.dicebear.com/6.x/open-peeps/svg";
   const navigate = useNavigate();
   const toastifyOptions = {
@@ -37,7 +41,7 @@ function AvatarSettings() {
           navigate("/");
         })
         .catch((error) => {
-          toast.error("Error setting avatar. Please try again.", toastifyOptions);
+          toast.error("Oops! We couldn’t set your profile picture. Please try again.", toastifyOptions);
         });
     }
   };
@@ -64,19 +68,19 @@ function AvatarSettings() {
   return (
     <>
       {isLoading ? (
-        <Container>
+        <Container colors={colors}>
           <div className="wrapper">
             <div className="title-container">
-              <h1>Pick your profile picture</h1>
+              <h1>Time to shine! Pick a picture that captures your personality.</h1>
             </div>
             <img src={Loader} alt="loader" className="loader" />
           </div>
         </Container>
       ) : (
-        <Container>
+        <Container colors={colors}>
           <div className="wrapper">
             <div className="title-container">
-              <h1>Pick your profile picture</h1>
+              <h1>Time to shine! Pick a picture that captures your personality.</h1>
             </div>
             <div className="avatars">
               {avatars.map((avatar, index) => {
@@ -158,7 +162,7 @@ const Container = styled.div`
       }
     }
     .selected {
-      border: 0.4rem solid #b3d87d;
+      border: 0.4rem solid ${({ colors }) => colors.lighterMainColor};
     }
   }
 
@@ -169,14 +173,14 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     object-fit: contain;
-    background-color: #81ba5d;
+    background-color: ${({ colors }) => colors.darkerMainColor};
     height: 2.3rem;
     width: 2.3rem;
     border: none;
     outline: transparent;
     transition: all 0.4s ease-in-out;
     &:hover {
-      background-color: #b3d87d;
+      background-color: ${({ colors }) => colors.lighterMainColor};
     }
     img {
       height: 1.7rem;
@@ -185,7 +189,7 @@ const Container = styled.div`
   }
 
   .submit-btn {
-    background-color: #81ba5d;
+    background-color: ${({ colors }) => colors.darkerMainColor};
     color: white;
     padding: 1rem 2rem;
     border: none;
@@ -196,7 +200,7 @@ const Container = styled.div`
     text-transform: uppercase;
     transition: all 0.4s ease-in-out;
     &:hover {
-      background-color: #b3d87d;
+      background-color: ${({ colors }) => colors.lighterMainColor};
     }
   }
 `;

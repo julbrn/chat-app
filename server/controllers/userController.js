@@ -6,11 +6,11 @@ module.exports.register = async (req, res, next) => {
         const { username, email, password } = req.body;
         const usernameCheck = await User.findOne({ username });
         if (usernameCheck) {
-            return res.json({ msg: "Username is already used", status: false })
+            return res.json({ msg: "That username is taken.", status: false })
         }
         const emailCheck = await User.findOne({ email });
         if (emailCheck) {
-            return res.json({ msg: "Email is already used", status: false })
+            return res.json({ msg: "Someone else has that email address.", status: false })
         }
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({ email, username, password: hashedPassword });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../assets/logo6.png";
@@ -6,8 +6,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { loginRoute } from "../utils/Api";
+import { ColorContext } from "../colorContext";
+import { greenColors, yellowColors } from "../utils/colors";
 
 function Login() {
+  const colorScheme = useContext(ColorContext);
+  const colors = colorScheme === "green" ? greenColors : yellowColors;
   const navigate = useNavigate();
   const [values, setValues] = useState({
     username: "",
@@ -31,10 +35,10 @@ function Login() {
   const handleValidation = () => {
     const { username, password } = values;
     if (password === "") {
-      toast.error("Password is required", toastifyOptions);
+      toast.error("Password field cannot be empty.", toastifyOptions);
       return false;
     } else if (username === "") {
-      toast.error("Username is required", toastifyOptions);
+      toast.error("Username field cannot be empty.", toastifyOptions);
       return false;
     }
     return true;
@@ -60,7 +64,7 @@ function Login() {
   };
   return (
     <>
-      <FormContainer>
+      <FormContainer colors={colors}>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="brand">
             <img src={Logo} alt="logo" />
@@ -110,13 +114,13 @@ const FormContainer = styled.div`
     input {
       background-color: transparent;
       padding: 1rem;
-      border: 0.1rem solid #b3d87d;
+      border: 0.1rem solid ${({ colors }) => colors.lighterMainColor};
       border-radius: 0.4rem;
       color: #fff;
       width: 100%;
       font-size: 1rem;
       &:focus {
-        border: 0.1rem solid #3a9bc2;
+        border: 0.1rem solid ${({ colors }) => colors.accent};
         outline: transparent;
       }
     }
@@ -124,7 +128,7 @@ const FormContainer = styled.div`
       filter: invert(100%);
     }
     button {
-      background-color: #81ba5d;
+      background-color: ${({ colors }) => colors.darkerMainColor};
       color: #fff;
       padding: 1rem 2rem;
       border: none;
@@ -135,19 +139,19 @@ const FormContainer = styled.div`
       text-transform: uppercase;
       transition: all 0.5s ease-in-out;
       &:hover {
-        background-color: #b3d87d;
+        background-color: ${({ colors }) => colors.lighterMainColor};
       }
     }
     span {
       color: #fff;
       text-transform: uppercase;
       a {
-        color: #81ba5d;
+        color: ${({ colors }) => colors.darkerMainColor};
         text-decoration: none;
         font-weight: 600;
         transition: all 0.4s ease-in-out;
         &:hover {
-          color: #b3d87d;
+          color: ${({ colors }) => colors.lighterMainColor};
         }
       }
     }

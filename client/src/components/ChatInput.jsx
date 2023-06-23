@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
 import Smile from "../assets/emoji.svg";
 import SendIcon from "../assets/send.png";
 
-function ChatInput({ handleSendMessage }) {
+function ChatInput({ handleSendMessage, colors }) {
   const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const handleEmojiPickerhideShow = () => {
@@ -32,7 +32,7 @@ function ChatInput({ handleSendMessage }) {
     }
   };
   return (
-    <Container>
+    <Container colors={colors}>
       <div className="button-container">
         <div className="emoji">
           <button className="emoji-button" onClick={handleEmojiPickerhideShow}>
@@ -99,12 +99,12 @@ const Container = styled.div`
         bottom: 0;
         left: 40px;
         background-color: #080420;
-        border-color: #81ba5d;
+        border-color: ${({ colors }) => colors.darkerMainColor};
         ::-webkit-scrollbar {
           background-color: #080420;
           width: 5px;
           &-thumb {
-            background-color: #b3d87d;
+            background-color: ${({ colors }) => colors.lighterMainColor};
           }
         }
       }
@@ -115,6 +115,7 @@ const Container = styled.div`
     border-radius: 2rem;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 2rem;
     background-color: #ffffff34;
     input {
@@ -129,7 +130,7 @@ const Container = styled.div`
       padding-bottom: 5px;
 
       &::selection {
-        background-color: #81ba5d;
+        background-color: ${({ colors }) => colors.darkerMainColor};
       }
       &:focus {
         outline: none;
@@ -148,11 +149,11 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #81ba5d;
+      background-color: ${({ colors }) => colors.darkerMainColor};
       border: none;
       transition: all 0.5s ease-in-out;
       &:hover {
-        background-color: #b3d87d;
+        background-color: ${({ colors }) => colors.lighterMainColor};
       }
       @media screen and (min-width: 720px) and (max-width: 1080px) {
         padding: 0.3rem 1rem;
