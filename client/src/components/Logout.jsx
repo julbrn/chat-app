@@ -11,7 +11,7 @@ function Logout() {
   };
   return (
     <Button>
-      <img src={LogoutIcon} onClick={handleClick} alt="Log out" />
+      <img title="Log out" src={LogoutIcon} onClick={handleClick} alt="Log out" />
     </Button>
   );
 }

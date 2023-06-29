@@ -63,4 +63,4 @@ cd client
 yarn start
 ```
 
-Done! Now open localhost:3000 in your browser and enjoy chatting with YadaChat.
+Done! Now open http://localhost:3000 in your browser and enjoy chatting with YadaChat.
