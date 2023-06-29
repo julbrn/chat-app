@@ -16,6 +16,10 @@ YadaChat is chat application built with the power of MERN Stack and [socket.io](
 
 ![profile pic](./client/src/assets/screenshot2.jpeg)
 
+![chat](./client/src/assets/screenshot3.jpeg)
+
+![color scheme](./client/src/assets/screenshot4.jpeg)
+
 ## Installation Guide
 
 ### Requirements

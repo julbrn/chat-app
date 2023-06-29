@@ -62,8 +62,8 @@ function Register() {
       }
       if (data.status === true) {
         localStorage.setItem("chat-user", JSON.stringify(data.user));
+        navigate("/");
       }
-      navigate("/");
     }
   };
 

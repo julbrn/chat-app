@@ -96,6 +96,7 @@ const Container = styled.div`
       }
       .EmojiPickerReact {
         position: absolute;
+        opacity: 1;
         bottom: 0;
         left: 40px;
         background-color: #ffffffc1;

@@ -6,8 +6,8 @@ export const greenColors = {
 };
 
 export const yellowColors = {
-    lighterMainColor: "#fdc989",
-    darkerMainColor: "#F8B869",
-    accent: "#f6b5bd",
-    semiTransparent: "rgba(253, 201, 137, 0.8)"
+    lighterMainColor: "#ff8e3c",
+    darkerMainColor: "#ff8a24",
+    accent: "#d9376e",
+    semiTransparent: "rgba(255, 142, 60, 0.8)"
 };
